@@ -1,0 +1,188 @@
+Hands-On Programming with R
+
+> 1+1
+[1] 2
+> 100:130
+ [1] 100 101 102 103 104 105 106 107 108 109 110 111 112 113
+[15] 114 115 116 117 118 119 120 121 122 123 124 125 126 127
+[29] 128 129 130
+> 5-1
+[1] 4
+> 2*3
+[1] 6
+> 4-3
+[1] 1
+> 6/(4-2)
+[1] 3
+> Exercise
+Error: object 'Exercise' not found
+> 10+2
+[1] 12
+> 12*3
+[1] 36
+> 36-6
+[1] 30
+> 30/3
+[1] 10
+> 1:6
+[1] 1 2 3 4 5 6
+
+Objects
+
+> a<-1
+> a
+[1] 1
+> a+3
+[1] 4
+
+To create an R object, choose a name and then use the less-than symbol, <,
+followed by a minus sign, -, to save data into it. This combination looks like an
+arrow, <-. R will make an object, give it your name, and store in it whatever
+follows the arrow.
+When you ask R what’s in a, it tells you on the next line.
+You can use your object in new R commands, too. Since a previously stored the
+value of 1, you’re now adding 1 to 2.
+
+> die <- 1:6
+> die
+[1] 1 2 3 4 5 6
+
+Case Sensitive
+
+R also understands capitalization (or is case-sensitive), so name and
+Name will refer to different objects:
+Name <- 1
+name <- 0
+Name + 1
+
+ee which object names you have already used with the function ls:
+ls()
+
+> die -1
+[1] 0 1 2 3 4 5
+> 
+> die/2
+[1] 0.5 1.0 1.5 2.0 2.5 3.0
+> 
+> die * die
+[1]  1  4  9 16 25 36
+
+1:2
+[1] 1 2
+> 
+> 1:4
+[1] 1 2 3 4
+> die
+[1] 1 2 3 4 5 6
+> die+1:2
+[1] 2 4 4 6 6 8
+> die+1:4
+[1] 2 4 6 8 6 8
+Warning message:
+In die + 1:4 :
+  longer object length is not a multiple of shorter object length
+  
+inner multiplication with the %*% operator
+and outer multiplication with the %o% operator:
+
+> die%*%die
+     [,1]
+[1,]   91
+
+> die%o%die
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    1    2    3    4    5    6
+[2,]    2    4    6    8   10   12
+[3,]    3    6    9   12   15   18
+[4,]    4    8   12   16   20   24
+[5,]    5   10   15   20   25   30
+[6,]    6   12   18   24   30   36
+
+Functions
+
+> round(3.145)
+[1] 3
+> factorial(3)
+[1] 6
+> mean(1:6)
+[1] 3.5
+> mean(die)
+[1] 3.5
+> round(mean(die))
+[1] 4
+> sample(x=1:4, size=2)
+[1] 2 3
+
+> sample(x=1:4, size=1)
+[1] 1
+> sample(x=1:4, size=1)
+[1] 3
+
+round(3.1415, corners = 2)
+Error in round(3.1415, corners = 2) : 
+unused argument (corners = 2)
+
+> args(round)
+function (x, digits = 0) 
+NULL
+> 
+> round(3.145, digits =2)
+[1] 3.15
+
+> args(round)
+function (x, digits = 0) 
+NULL
+> 
+> round(3.145, digits =2)
+[1] 3.15
+> 
+> sample(die,1)
+
+Sample with Replacement
+
+sample(die, size = 2)
+[1] 4 2
+
+however, when you roll a pair of dice, each die is independent of
+the other. If the first die comes up six, it does not prevent the second die from coming
+up six. In fact, it doesn’t influence the second die in any way whatsoever. You can recreate
+this behavior in sample by adding the argument replace = TRUE:
+
+sample(die, size = 2, replace = TRUE)
+[1] 6 6
+
+sample(die, size = 2, replace = TRUE)
+[1] 4 3
+
+dice <- sample(die, size=2, replace=TRUE)
+dice
+[1] 2 3
+
+sum(dice)
+[1] 5
+
+dice
+[1] 2 3
+
+dice
+[1] 2 3
+
+Writing Your Own Functions
+
+die <- 1:6
+dice <- sample(die, size = 2, replace = TRUE)
+sum(dice)
+
+The Function Constructor
+
+roll <-function(){
+
+
+roll <- function() {
+die <- 1:6
+dice <- sample(die,size=2,replace=TRUE)
+sum(dice)
+}
+
+roll()
+# 4
